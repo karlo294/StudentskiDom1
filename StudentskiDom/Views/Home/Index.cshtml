@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "Početna stranica";
+
+}
+<!--dodana je background slika ali nije responzivna bar mislim-->
+<style>
+    .jumbotron {
+        margin-top: 20px;
+        background: url('/Images/MEV.jpg')no-repeat center center;
+        background-size: cover;
+        min-height: 550px;
+        margin-bottom: 0px;
+        width: 100%;
+        padding: 0,0;
+        color:darkred;
+    }
+</style>
+<div class="jumbotron">
+    <h1>Studentski dom</h1>
+    <p class="lead">Međimursko veleučilište u Čakovcu</p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <!--bonus-moze se staviti na pocetnu stranicu i ne mora-->
+        <h2>O projektu</h2>
+        <p>
+            Ova web aplikacija napravljena je u svrhu lakšeg vođenja evidencije studenata smještenih u studentskom domu.
+            Kroz samu aplikaciju može se vidjeti popis svih studenata koji su smješteni u domu,popis uplata, te slike soba kako bi
+            novi korisnici vidjeli opremljenost soba te se na temelju toga odlučili upisati u studentski dom.
+            Svi korisnici koji žele pristupiti aplikaciji prvo se trebaju registrirati!
+        </p>
+    </div>
+    <div class="col-md-4">
+        <!--trenutno bude napravljeno kao u prezentaciji izgled ali predlazem da se tu stavi prijava i registracija kad se taj dio koda napravi-->
+        <h2>Pretraživanje i pregled</h2>
+        <p>
+            Pretraživanje korisnika smještenih u domu po imenu i prezimenu, te upravljanje korisnicima doma
+        </p>
+        <p>@Html.ActionLink("Pregled","PopisKorisnika","Korisnici",null,new {@class="btn btn-default" })</p>
+    </div>
+    <div class="col-md-4">
+        <h2>Unos novog zahtjeva za smještaj</h2>
+        <p>Unos novog zahtjeva za smještaj u bazu podataka </p>
+        <p>@Html.ActionLink("Unos","Azuriraj","Studenti",null,new { @class="btn btn-default"})</p>
+    </div>
+
+    
+</div>

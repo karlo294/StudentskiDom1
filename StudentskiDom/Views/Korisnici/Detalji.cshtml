@@ -1,0 +1,111 @@
+﻿@using StudentskiDom.Models
+@model Korisnik
+@{
+    ViewBag.Title = "Detalji";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+}
+
+<h2>Detalji o korisniku</h2>
+
+<div class="row">
+    <div class="col-md-2">
+        <strong>Prezime:</strong>
+    </div>
+    <div class="col-md-10">
+        @Model.Prezime
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-2">
+        <strong>Ime:</strong>
+    </div>
+    <div class="col-md-10">
+        @Model.Ime
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-2">
+        <strong>Prezime:</strong>
+    </div>
+    <div class="col-md-10">
+        @Model.Prezime
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-2">
+        <strong>Godina studija:</strong>
+    </div>
+    <div class="col-md-10">
+        @Model.GodinaStudija
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-2">
+        <strong>Redovni Student:</strong>
+    </div>
+    <div class="col-md-10">
+        @Model.StatusStudenta
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-2">
+        <strong>OIB:</strong>
+    </div>
+    <div class="col-md-10">
+        @Model.Oib
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-2">
+        <strong>Email:</strong>
+    </div>
+    <div class="col-md-10">
+        @Model.Email
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-2">
+        <strong>Telefon:</strong>
+    </div>
+    <div class="col-md-10">
+        @Model.Telefon
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-2">
+        <strong>Mjesto:</strong>
+    </div>
+    <div class="col-md-10">
+        @Model.Mjesto
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-2">
+        <strong>Županija:</strong>
+    </div>
+    <div class="col-md-10">
+        @Model.Zupanija
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-2">
+        <strong>Država:</strong>
+    </div>
+    <div class="col-md-10">
+        @Model.Drzava
+    </div>
+</div>
+
+@Html.ActionLink("Povratak na popis korisnika", "PopisKorisnika", "Korisnici", null, new {@class="btn btn-primary btn-sm"})

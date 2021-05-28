@@ -1,0 +1,69 @@
+﻿@using StudentskiDom.Models
+@using PagedList.Mvc;
+@model PagedList.IPagedList<Korisnik>
+@{ 
+    AjaxOptions ajaxOpt = new AjaxOptions()
+    {
+        UpdateTargetId = "popisKorisnika",
+        InsertionMode = InsertionMode.Replace,
+        HttpMethod = "GET",
+        OnBegin = "LoadingRow"
+
+    };
+}
+
+<div id="popisKorisnika">
+    <table id="tableKorisnici" class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>
+                    <!--Trenutno je napravljen sort samo po prezimenu korisnika moguce napraviti i po godini studija mozda smao ne znam kako-->
+                    @Ajax.ActionLink("Prezime","PopisKorisnikaPartial",
+                   new {naziv=ViewBag.Naziv,sort=ViewBag.NazivSort},ajaxOpt)    <!--pretpostavljamn da se to moze tak napisati-->
+                </th>
+                <th>Ime</th>
+                <th>OIB</th>
+                <th>Redovni</th>
+                <th>Akcije</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!--vjerojatno bude trebalo doraditi jer ja kratim na ono sto trenutno imamo(drugi calnovi tima doraditi)-->
+            @if (Model.Any)
+            {
+                foreach (var korisnik in Model)
+                {
+            <tr>
+                <td>@Korisnik.Id</td>
+                <td>@Korisnik.Prezime</td>
+                <td>@Korisnik.Ime</td>
+                <td>@korisnik.Oib</td>
+                <td>@Html.CheckBox("chbRedovan", korisnik.StatusStudenta, new { @disabled = true })</td>
+                <td>
+                    @Html.ActionLink("Info", "Detalji", new { id = korisnik.Id }, new { @class = "btn btn-info btn-sm" })
+                    @Html.ActionLink("Ažuriraj", "Azuriraj", new { id = korisnik.Id }, new { @class = "btn btn-warning btn-sm" })
+                    @Html.ActionLink("Izbriši", "Brisi", new { id = korisnik.Id }, new { @class = "btn btn-danger btn-sm" })
+                </td>
+            </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="7" style="text-align:center;">Nema rezultata pretrage</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div id="pager">
+        Ukupno rezultata:@Model.TotalItemCount <br />
+
+        Stranica @(Model.PageCount<Model.PageNumber ? 0:Model.PageNumber) od @Model.PageCount
+
+        @Html.PagedListPager(Model, page => Url.Action("PopisKorisnikaPartial",
+       new {page,naziv=ViewBag.Naziv,sort=ViewBag.Sortiranje}),
+       PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(ajaxOpt))
+    </div>
+</div>
+

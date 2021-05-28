@@ -1,0 +1,81 @@
+﻿@using StudentskiDom.Models
+@model List<Korisnik>
+@{
+    ViewBag.Title = "Popis Korisnika";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    AjaxOptions ajaxOpt = new AjaxOptions()
+    {
+        UpdateTargetId = "popisKorisnika",
+        InsertionMode = InsertionMode.Replace,
+        HttpMethod = "GET",
+        OnBegin = "LoadingRow"
+    };
+}
+
+<h2>Popis korisnika</h2>
+<a href="@Url.Action("Azuriraj","Korisnici")" class="btn btn-success">
+    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Kreiranje novog zahtjeva za smještaj
+</a>
+<br />
+<br />
+<!--Za pretragu bi mogli napraviti po nazivu i po godini studija posto nemamo ukljuceni spol u tablici korisnici ili mozemo napraviti samo po nazivu-->
+@using (Ajax.BeginForm("PopisKorisnikaPartial", "Korisnici", ajaxOpt, new { @class = "form-inline",id="formPopisKorisnika" }))
+{
+    @Html.TextBox("naziv", "", new { @class = "form-control", placeholder = "Naziv korisnika" })
+    <!--Trenutno nek bude samo pretraga po nazivu kasnija lagano dodamo pretragu po godini studija-->
+    <!--moguce da bude trebalo dodati jos neke stvari kako se bude projekt nadogradivao-u svakom slucaju kad se to napravi pratiti prezentaciju 10(AJAX)-->
+    <button type="submit" class="btn btn-primary">
+        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>Traži
+    </button>
+
+}
+<br />
+
+@{
+    Html.RenderAction("PopisKorisnikaPartial", new { naziv = "" });
+}
+<!--pretpostavljam da taj dio treba tako napraviti, ukoliko je nesto krivo lagano se nadogradi-->
+@section Scripts{
+    <script type="text/javascript">
+        function LoadingRow() {
+            $("#tableKorisnici tbody").empty();
+
+            $("#tableKorisnici tbody").append('<tr><td colspan="7" style="text-align: center">Pretraga u tijeku...</td></tr>');
+
+            $("#pager").empty();
+        }
+    </script>
+}
+<!--Ne znam treba li taj dio obrisati???-->
+<!--Trenutno sam zakomentiral ukoliko bude potrebno lagano se od komentira-->
+@if (Model.Count == 0)
+{
+    <p>Nema rezultata pretrage!</p>
+}
+else
+{
+    <table class="table table-striped">
+        <tr>
+            <th>Id</th>
+            <th>Prezime</th>
+            <th>Ime</th>
+            <th>Oib</th>
+            <th>Status</th>
+            <th>Akcije</th>
+        </tr>
+        <!--ne znam kako popraviti ove errore povezani su sa onim exception kojeg izbacuje na popiskorisnika-->
+        @foreach (var korisnik in Models)
+        {
+            <tr>
+                <td>@korisnik.Id</td>
+                <td>@korisnik.Prezime</td>
+                <td>@korisnik.Ime</td>
+                <td>@korisnik.Oib</td>
+                <td>@Html.CheckBox("chbRedovan", korisnik.StatusStudenta, new { @disabled = "disabled" })</td>
+                <td>@Html.ActionLink("Info", "Detalji", new { id = korisnik.Id },new { @class="btn btn-info btn-sm"})</td>
+                <td>@Html.ActionLink("Ažuriraj", "Azuriraj", new { id = korisnik.Id }, new { @class = "btn btn-warning btn-sm" })</td>
+                <td>@Html.ActionLink("Izbriši", "Brisi", new { id = korisnik.Id },new { @class = "btn btn-danger btn-sm" })</td>
+            </tr>
+        }
+    </table>
+}
