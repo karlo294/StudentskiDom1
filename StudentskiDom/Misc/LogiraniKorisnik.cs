@@ -20,19 +20,19 @@ namespace StudentskiDom.Misc
             return false;
 
         }
-        public LogiraniKorisnik(Korisnik kor)
-        {
-            this.Identity = new GenericIdentity(kor.KorisnickoIme); //izbacuje error jer meotda korisniko ime ne postoji u modelu korisnik
-            this.KorisnickoIme = kor.KorisnickoIme;
-            this.PrezimeIme = kor.PrezimeIme; //tu ne izbacuje error jer metoda prezimeIme vec postoji u modelu korisnik
-            this.Ovlast = kor.SifraOvlasti; //takoder izbacuje error iz istog razloga-potrebno doraditi ili kreirati novu tablicu
+        //public LogiraniKorisnik(Korisnik kor)
+        //{
+        //    this.Identity = new GenericIdentity(kor.KorisnickoIme); //izbacuje error jer meotda korisniko ime ne postoji u modelu korisnik
+        //    this.KorisnickoIme = kor.KorisnickoIme;
+        //    this.PrezimeIme = kor.PrezimeIme; //tu ne izbacuje error jer metoda prezimeIme vec postoji u modelu korisnik
+        //    this.Ovlast = kor.SifraOvlasti; //takoder izbacuje error iz istog razloga-potrebno doraditi ili kreirati novu tablicu
 
-        }
-        public LogiraniKorisnik(string korisnickoIme)
-        {
-            this.Identity = new GenericIdentity(korisnickoIme);
-            this.KorisnickoIme = korisnickoIme;
-        }
+        //}
+        //public LogiraniKorisnik(string korisnickoIme)
+        //{
+        //    this.Identity = new GenericIdentity(korisnickoIme);
+        //    this.KorisnickoIme = korisnickoIme;
+        //}
 
     }
 }

@@ -20,19 +20,19 @@ namespace StudentskiDom
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
-        protected void Application_PostAuthenticateRequest(object sender,EventArgs e)
-        {
-            HttpCookie authCookie = Request.Cookies[FormsAuthentication.FormsCookieName];
-            if(authCookie!=null)
-            {
-                FormsAuthenticationTicket authTicekt = FormsAuthentication.Decrypt(authCookie.Value);
-                JavaScriptSerializer serializer = new JavaScriptSerializer();
-                LogiraniKorisnikSerializeModel serializeModel = serializer.Deserialize<LogiraniKorisnikSerializeModel>(authTicekt.UserData);
-                LogiraniKorisnik korisnik = new LogiraniKorisnik(authTicekt.Name);
-                korisnik.PrezimeIme = serializeModel.PrezimeIme;
-                korisnik.Ovlast = serializeModel.Ovlast;
-                HttpContext.Current.User = korisnik;
-            }
-        }
+        //protected void Application_PostAuthenticateRequest(object sender,EventArgs e)
+        //{
+        //    HttpCookie authCookie = Request.Cookies[FormsAuthentication.FormsCookieName];
+        //    if(authCookie!=null)
+        //    {
+        //        FormsAuthenticationTicket authTicekt = FormsAuthentication.Decrypt(authCookie.Value);
+        //        JavaScriptSerializer serializer = new JavaScriptSerializer();
+        //        LogiraniKorisnikSerializeModel serializeModel = serializer.Deserialize<LogiraniKorisnikSerializeModel>(authTicekt.UserData);
+        //        //LogiraniKorisnik korisnik = new LogiraniKorisnik(authTicekt.Name);
+        //        korisnik.PrezimeIme = serializeModel.PrezimeIme;
+        //        korisnik.Ovlast = serializeModel.Ovlast;
+        //        HttpContext.Current.User = korisnik;
+        //    }
+        //}
     }
 }

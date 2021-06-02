@@ -31,9 +31,9 @@
 }
 <br />
 
-@{
+@*@{
     Html.RenderAction("PopisKorisnikaPartial", new { naziv = "" });
-}
+}*@
 <!--pretpostavljam da taj dio treba tako napraviti, ukoliko je nesto krivo lagano se nadogradi-->
 @section Scripts{
     <script type="text/javascript">
@@ -64,7 +64,7 @@ else
             <th>Akcije</th>
         </tr>
         <!--ne znam kako popraviti ove errore povezani su sa onim exception kojeg izbacuje na popiskorisnika-->
-        @foreach (var korisnik in Models)
+        @foreach (var korisnik in Model)
         {
             <tr>
                 <td>@korisnik.Id</td>

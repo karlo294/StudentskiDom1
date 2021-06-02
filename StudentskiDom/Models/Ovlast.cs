@@ -15,6 +15,6 @@ namespace StudentskiDom.Models
         public string Naziv { get; set; }
         //zasad nek bude tako u uputi pise kaj bi tocno trebalo napraviti ja samo pratim prezentaciju 
 
-        
+
     }
 }

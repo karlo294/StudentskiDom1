@@ -25,11 +25,11 @@ namespace StudentskiDom.Models
                     //Lozinka = "florijan77",
                     Telefon = 0998418678,
                     Mjesto = "Vinkovci",
-                    Zupanija = "Vukovarsko-Srijemska",
+                    //Zupanija = "Vukovarsko-Srijemska",
                     Drzava = "Hrvatska",
                     GodinaStudija = GodinaStudija.Treca,
                     StatusStudenta = false,
-                    InidikatorStudenta = true
+                    //InidikatorStudenta = true
 
                 });
 
@@ -43,11 +43,11 @@ namespace StudentskiDom.Models
                     //Lozinka = "piplmusttrustast",
                     Telefon = 0982356675,
                     Mjesto = "Zagreb",
-                    Zupanija = "Zagrebacka zupanija",
+                   // Zupanija = "Zagrebacka zupanija",
                     Drzava = "Hrvatska",
                     GodinaStudija = GodinaStudija.Prva,
                     StatusStudenta = true,
-                    InidikatorStudenta = true
+                    //InidikatorStudenta = true
 
                 });
 
@@ -61,11 +61,11 @@ namespace StudentskiDom.Models
                    // Lozinka = "kmicakmicacrnimrak",
                     Telefon = 0918438679,
                     Mjesto = "Split",
-                    Zupanija = "Splitsko-Dalmatinska",
+                    //Zupanija = "Splitsko-Dalmatinska",
                     Drzava = "Hrvatska",
                     GodinaStudija = GodinaStudija.Druga,
                     StatusStudenta = true,
-                    InidikatorStudenta = true
+                    //InidikatorStudenta = true
 
                 });
             }

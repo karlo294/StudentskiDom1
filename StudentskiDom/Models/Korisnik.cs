@@ -79,11 +79,11 @@ namespace StudentskiDom.Models
         [Compare("Mjesto", ErrorMessage = "Obavezno ispuniti mjesto")]
         public string Mjesto { get; set; }
 
-        [Column("zupanijak")]
-        [Display(Name = "Županija")]
-        [Required]
-        [Compare("Zupanija", ErrorMessage = "Obavezno ispuniti Županiju")]
-        public string Zupanija { get; set; }
+        //[Column("zupanijak")]
+        //[Display(Name = "Županija")]
+        //[Required]
+        //[Compare("Zupanija", ErrorMessage = "Obavezno ispuniti Županiju")]
+        //public string Zupanija { get; set; }
 
         [Column("drzavaK")]
         [Display(Name = "Država")]
@@ -97,7 +97,7 @@ namespace StudentskiDom.Models
 
         //nisam siguran koje validacije bi trebalo staviti
         //ime kolone je [Column("indikatorSA")]
-        public bool InidikatorStudenta { get; set; }
+        //public bool InidikatorStudenta { get; set; }
 
         //doraditi model korisnik prema uputi-posto je odvjde vec vise manje sve gotovo preldazem da se unutar tablice korisnici u
         //bazi samo napravi dodatna kolona korisnicko ime ukoliko je to pametno te tu dodati samo metodu i potrebnu validaciju
