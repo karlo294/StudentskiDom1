@@ -7,14 +7,14 @@ namespace StudentskiDom.Misc
 {
     public class LogiraniKorisnikSerializeModel
     {
-        public string KorisnickoIme { get; set; }
+        public string Email { get; set; }
         public string PrezimeIme { get; set; }
-        public string Ovlast { get; set; }
+        public bool Indikator{ get; set; }
         internal void CopyFromUser(LogiraniKorisnik user)
         {
-            this.KorisnickoIme = user.KorisnickoIme;
+            this.Email= user.Email;
             this.PrezimeIme = user.PrezimeIme;
-            this.Ovlast = user.Ovlast;
+            this.Indikator = user.Indikator;
         }
     }
 }

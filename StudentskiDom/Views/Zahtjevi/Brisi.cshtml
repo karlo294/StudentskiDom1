@@ -1,0 +1,20 @@
+﻿@using StudentskiDom.Models
+@model Zahtjev
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+<strong>Jeste li sigurni da želite izbrisati zahtjev korisnika @Model.Korisnik.PrezimeIme ?</strong>
+
+@using (Html.BeginForm("Brisi", "Zahtjevi"))
+{
+    @Html.AntiForgeryToken();
+    <button type="submit" class="btn btn-danger">
+        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Izbriši
+    </button>
+    <br />
+    <br />
+
+    @Html.ActionLink("Odustani", "Index");
+}

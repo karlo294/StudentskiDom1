@@ -1,0 +1,40 @@
+﻿@using StudentskiDom.Models
+@model List<Uplata>
+@{
+    ViewBag.Title = "Popis uplata";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Popis uplata</h2>
+<a href="@Url.Action("Azuriraj","Uplata")" class="btn btn-success">
+    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Kreiranje nove uplate
+</a>
+<br />
+<br/>
+<br/>
+
+<table class="table table-striped">
+    <tr>
+        <th>Id uplate</th>
+        <th>Mjesec </th>
+        <th>Korisnik </th>
+        <th></th>
+        <th>Akcije</th>
+        <th></th>
+
+    </tr>
+    @foreach (var uplata in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => uplata.IdUplata)</td>
+            <td>@Html.DisplayFor(modelItem => uplata.razdobljeUplata)</td>
+            <td>@Html.DisplayFor(modelItem => uplata.Korisnik.PrezimeIme)</td>
+            <td>@Html.ActionLink("Detalji", "Detalji", new { id = uplata.IdUplata }, new { @class = "btn btn-info btn-sm" })</td>
+            <td>@Html.ActionLink("Ažuriraj", "Azuriraj", new { id = uplata.IdUplata }, new { @class = "btn btn-danger btn-sm" })</td>
+            <td>@Html.ActionLink("Briši", "Brisi", new { id = uplata.IdUplata }, new { @class = "btn btn-warning btn-sm" })</td>
+
+        </tr>
+    }
+</table>
+
+

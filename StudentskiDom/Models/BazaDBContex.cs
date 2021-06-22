@@ -17,9 +17,10 @@ namespace StudentskiDom.Models
         public DbSet<Sobe> popisSobe { get; set; }
 
         public DbSet<Uplata> popisUplata { get; set; }
+        public DbSet<Mjesto> popisMjesta { get; set; }
 
-        
-        //public DbSet<SlikeSoba> popisSlikeSobe { get; set; }
+
+        public DbSet<SlikeSoba> popisSlikeSobe { get; set; }
 
         //ovdje bi trebalo dodati jos dvije tablice(ovlast) i posebna tablica za prijavu korisnika(koja u bazi ima atribute-
         //prezime,ime,korisnickoime,email,ovlast,lozinkaunos,ponovljenalozinka)pratiti prezentaciju 11 ja u ovom slucaju necu napraviti

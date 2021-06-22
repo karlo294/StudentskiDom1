@@ -27,19 +27,19 @@ namespace StudentskiDom.Models
 
         [Column("oibKorisnik")]
         [Display(Name = "OIB")]
-        [Required(ErrorMessage = "{0} je obavezan")]
         [StringLength(11, MinimumLength = 11, ErrorMessage = "{0} mora biti duljine {1} znakova")]
         public string Oib { get; set; }
 
         [Column("emailKorisnik")]
         [Display(Name = "Email")]
-        [Required]
+        [Required(ErrorMessage = "{0} je obavezan")]
         [EmailAddress]
         public string Email { get; set; }
         //nisam siguran jel treba tu staviti [column("ime kolone u tablici")]
         //u varijabli lozinke spremljene su lozinke iz liste,prije baze
-        //public string Lozinka { get; set; }
+        public string Lozinka { get; set; }
 
+        [Display(Name = "Ime i Prezime")]
         public string PrezimeIme
         {
             get
@@ -56,14 +56,14 @@ namespace StudentskiDom.Models
         //nisam siguran jel treba tu staviti [column("ime kolone u tablici")]
         [Display(Name = "Lozinka")]
         [DataType(DataType.Password)]
-        [Required]
+
         [NotMapped]
         public string LozinkaUnos { get; set; }
 
         //nisam siguran jel treba tu staviti [column("ime kolone u tablici")]
         [Display(Name = "Ponovljena lozinka")]
         [DataType(DataType.Password)]
-        [Required]
+
         [NotMapped]
         [Compare("LozinkaUnos", ErrorMessage = "Lozinke moraju biti jednake")]
         public string LozinkaUnos2 { get; set; }
@@ -71,23 +71,22 @@ namespace StudentskiDom.Models
         [Column("mobKorisnik")]
         [Display(Name = "Telefon")]
         [Compare("Telefon", ErrorMessage = "Obavezno ispuniti broj telefona")]
-        public int Telefon { get; set; }
+        public string Telefon { get; set; }
 
         [Column("pbrMjesto")]
-        [Display(Name = "Mjesto stanovanja")]
-        [Required]
-        [Compare("Mjesto", ErrorMessage = "Obavezno ispuniti mjesto")]
-        public string Mjesto { get; set; }
+        [Display(Name = "Poštanski broj")]
 
-        //[Column("zupanijak")]
-        //[Display(Name = "Županija")]
-        //[Required]
-        //[Compare("Zupanija", ErrorMessage = "Obavezno ispuniti Županiju")]
-        //public string Zupanija { get; set; }
+
+        [ForeignKey("Mjesto")]
+
+        public int pMjesto { get; set; }
+
+        public virtual Mjesto Mjesto { get; set; }
+
 
         [Column("drzavaK")]
         [Display(Name = "Država")]
-        [Required]
+
         [Compare("Drzava", ErrorMessage = "Obavezno ispuniti Državu")]
         public string Drzava { get; set; }
 
@@ -96,8 +95,10 @@ namespace StudentskiDom.Models
         public bool StatusStudenta { get; set; }
 
         //nisam siguran koje validacije bi trebalo staviti
-        //ime kolone je [Column("indikatorSA")]
-        //public bool InidikatorStudenta { get; set; }
+        [Column("indikatorSA")]
+        [Display(Name = "Indikator")]
+         
+         public bool InidikatorStudenta { get; set; }
 
         //doraditi model korisnik prema uputi-posto je odvjde vec vise manje sve gotovo preldazem da se unutar tablice korisnici u
         //bazi samo napravi dodatna kolona korisnicko ime ukoliko je to pametno te tu dodati samo metodu i potrebnu validaciju

@@ -8,9 +8,10 @@ namespace StudentskiDom.Models
 {
     public class PrijavaKorisnika
     {
-        [Display(Name = "Korisničko ime")]
+        [Display(Name = "Email")]
         [Required]
-        public string KorisnickoIme { get; set; }
+        public string Email { get; set; }
+        public virtual Korisnik Korisnik { get; set; }
 
         [Display(Name = "Lozinka")]
         [Required]

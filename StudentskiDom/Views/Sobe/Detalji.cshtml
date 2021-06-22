@@ -1,0 +1,70 @@
+﻿@using StudentskiDom.Models
+@model Sobe
+
+@{
+    ViewBag.Title = "Detalji";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+}
+
+<h2>Detalji o sobama</h2>
+
+<div class="row">
+    <div class="col-md-2">
+        <strong>Id sobe:</strong>
+    </div>
+    <div class="col-md-10">
+        @Model.IdSoba
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-2">
+        <strong>Veličina sobe(m2):</strong>
+    </div>
+    <div class="col-md-10">
+        @Model.VelicinaSobe
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-2">
+        <strong>Broj kreveta:</strong>
+    </div>
+    <div class="col-md-10">
+        @if (@Model.BrojKreveta == 1)
+        {
+            <div>Jednokrevetna</div>
+        }
+        else
+        {
+            <div>Dvokrevetna</div>
+        }
+
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-2">
+        <strong>Opis sobe:</strong>
+    </div>
+    <div class="col-md-10">
+        @Model.Opis
+    </div>
+</div>
+@*@if (!String.IsNullOrWhiteSpace(Model.SlikeSoba.Slika)) {
+<div class="row">
+    <div class="col-md-2">
+        <strong>Slika:</strong>
+    </div>
+    <div class="col-md-10">
+        <img src="~/Images/@Model.SlikeSoba.Slika" witdh="150" heighth="150" />
+    </div>
+</div>  neuspjeli pokusaj povezivanja baze sa prikazom slika *@
+
+
+@Html.ActionLink("Povratak na popis soba", "Index", "Sobe", null, new { @class = "btn btn-primary btn-sm" })
+

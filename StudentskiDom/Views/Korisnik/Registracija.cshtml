@@ -1,0 +1,130 @@
+﻿@using StudentskiDom.Models
+@model Korisnik
+@{
+    ViewBag.Title = "Registracija korisnika";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<!--
+    ako koristimo metodu Html.BeginForm() bez parametara onda se podaci šalju po defualtu HTTP POST metodom
+    na metodu koja je i kreirala ovaj view: Registracija
+-->
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>Registracija korisnika</h4>
+    <hr />
+
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Prezime, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Prezime, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Prezime, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Ime, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Ime, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Ime, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Oib, new { @class = "col-sm-2 control-label" })
+        <div class="col-sm-10">
+            @Html.TextBoxFor(model => model.Oib, "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(model => model.Oib, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Telefon, new { @class = "col-sm-2 control-label" })
+        <div class="col-sm-10">
+            @Html.TextBoxFor(model => model.Telefon, "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(model => model.Telefon, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.LozinkaUnos, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.LozinkaUnos, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.LozinkaUnos, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.LozinkaUnos2, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.LozinkaUnos2, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.LozinkaUnos2, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.GodinaStudija, new { @class = "col-sm-2 control-label" })
+        <div class="col-sm-10">
+            @Html.EnumDropDownListFor(model => model.GodinaStudija, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.GodinaStudija, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.StatusStudenta, new { @class = "col-sm-2 control-label" })
+        <div class="col-sm-10">
+            @Html.CheckBoxFor(model => model.StatusStudenta)
+            @Html.ValidationMessageFor(model => model.StatusStudenta, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.pMjesto, new { @class = "col-sm-2 control-label" })
+        <div class=”row”>
+
+            <div class="col-sm-2">
+                @Html.TextBoxFor(model => model.pMjesto, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.pMjesto, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-sm-2">
+
+                @Html.TextBoxFor(model => model.Mjesto.nazivMjesto, new { disabled = true, @class = "form-control" })
+
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Drzava, new { @class = "col-sm-2 control-label" })
+        <div class="col-sm-10">
+            @Html.TextBoxFor(model => model.Drzava, "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(model => model.Drzava, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div>
+
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-success">
+                <span class="glyphicon glyphicon-user" aria-hidden="false"></span> Registriraj
+            </button>
+        </div>
+    </div>
+
+</div>
+}

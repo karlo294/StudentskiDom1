@@ -1,0 +1,33 @@
+﻿@using StudentskiDom.Models
+@model List<Zahtjev>
+@{
+    ViewBag.Title = "Popis zahtjeva";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Popis zahtjeva</h2>
+
+<table class="table table-striped">
+    <tr>
+        <th>Id zahtjeva</th>
+        <th>Godina podnešenja zahtjeva</th>
+        <th>Korisnik </th>
+        <th></th>
+        <th>Akcije</th>
+        <th></th>
+
+    </tr>
+    @foreach (var zahtjev in Model)
+    {
+<tr>
+    <td>@Html.DisplayFor(model => zahtjev.IdZahtjev)</td>
+    <td>@Html.DisplayFor(modelItem => zahtjev.datumZahtjeva.Value.Year)</td>
+    <td>@Html.DisplayFor(modelItem => zahtjev.Korisnik.PrezimeIme)</td>
+    <td>@Html.ActionLink("Detalji", "Detalji", new { id = zahtjev.IdZahtjev }, new { @class = "btn btn-info btn-sm" })</td>
+    <td>@Html.ActionLink("Ažuriraj", "Azuriraj", new { id = zahtjev.IdZahtjev }, new { @class = "btn btn-danger btn-sm" })</td>
+    <td>@Html.ActionLink("Briši", "Brisi", new { id = zahtjev.IdZahtjev }, new { @class = "btn btn-warning btn-sm" })</td>
+
+</tr>
+    }
+</table>
+

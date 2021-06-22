@@ -1,0 +1,141 @@
+﻿@using StudentskiDom.Models
+@model Uplata
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@if (ViewBag.Novi)
+{
+    <h2>Kreiranje nove uplate</h2>
+}
+else
+{
+    <h2>Ažuriranje podataka o uplati</h2>
+
+}
+
+
+@using (Html.BeginForm("Azuriraj", "Uplata", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "Ispravite podatke");
+    if (!ViewBag.Novi)
+    {
+        <div class="form-group">
+            @Html.LabelFor(model => model.IdUplata, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-10">
+                @Html.TextBoxFor(model => model.IdUplata, new { disabled = true, @class = "form-control" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Korisnik.PrezimeIme, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-10">
+                @Html.TextBoxFor(model => model.Korisnik.PrezimeIme, new { disabled = true, @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Korisnik.Oib, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-10">
+                @Html.TextBoxFor(model => model.Korisnik.Oib, new { disabled = true, @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.iznosUplata, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-10">
+                @Html.TextBoxFor(model => model.iznosUplata, new { disabled = true, @class = "form-control" })
+            </div>
+        </div> }
+    else
+    {
+<div class="form-group">
+    @Html.LabelFor(model => model.idKorisnik, new { @class = "col-sm-2 control-label" })
+    <div class="col-sm-10">
+        @Html.TextBoxFor(model => model.idKorisnik, "", new { @class = "text-danger" })
+        @Html.ValidationMessageFor(model => model.idKorisnik, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+       
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.Korisnik.Ime, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-10">
+                @Html.TextBoxFor(model => model.Korisnik.Ime, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.Korisnik.Ime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Korisnik.Prezime, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-10">
+                @Html.TextBoxFor(model => model.Korisnik.Prezime, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.Korisnik.Prezime, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.datumUplate, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-10">
+                @Html.TextBoxFor(model => model.datumUplate, new { disabled = true, @Value = @DateTime.Now.ToShortDateString() })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.idSobe, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-10">
+                @Html.TextBoxFor(model => model.idSobe, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.idSobe, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.iznosUplata, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-10">
+                @Html.TextBoxFor(model => model.iznosUplata, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.iznosUplata, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    }
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.statusPlacanja, new { @class = "col-sm-2 control-label" })
+        <div class="col-sm-10">
+            @Html.CheckBoxFor(model => model.statusPlacanja)
+            @Html.ValidationMessageFor(model => model.statusPlacanja, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.opisUplate, new { @class = "col-sm-2 control-label" })
+        <div class="col-sm-10">
+            @Html.TextBoxFor(model => model.opisUplate, "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(model => model.opisUplate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.razdobljeUplata, new { @class = "col-sm-2 control-label" })
+        <div class="col-sm-10">
+            @Html.TextBoxFor(model => model.razdobljeUplata, "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(model => model.razdobljeUplata, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div>
+
+    </div>
+    <br />
+
+
+
+    <!--button za spremanje-->
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-success">
+                <span class="glyphicon glyphicon-floppy-disk" aria-hidden="false"></span>Spremi
+            </button>
+        </div>
+    </div>
+}
+<!--link za povratak-->
+@Html.ActionLink("Povratak bez spremanja", "Index", "Uplata")

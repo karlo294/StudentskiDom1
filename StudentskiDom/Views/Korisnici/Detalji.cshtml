@@ -1,5 +1,6 @@
 ﻿@using StudentskiDom.Models
 @model Korisnik
+
 @{
     ViewBag.Title = "Detalji";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -8,6 +9,11 @@
 }
 
 <h2>Detalji o korisniku</h2>
+
+<a href="@Url.Action("DetaljiIspis", "Korisnici",
+                new { id = Model.Id })" class="btn btn-primary btn-sm">
+    <span class="glyphicon glyphicon-print" aria-hidden="true"></span> Kreiraj PDF
+</a>
 
 <div class="row">
     <div class="col-md-2">
@@ -41,7 +47,15 @@
         <strong>Redovni Student:</strong>
     </div>
     <div class="col-md-10">
-        @Model.StatusStudenta
+        @if (@Model.StatusStudenta == true)
+        {
+            <div>Da</div>
+        }
+        else
+        {
+            <div>Ne</div>
+        }
+       
     </div>
 </div>
 
@@ -77,18 +91,24 @@
         <strong>Mjesto:</strong>
     </div>
     <div class="col-md-10">
-        @Model.Mjesto
+        @if (@Model.Mjesto != null)
+        {
+            @Model.Mjesto.nazivMjesto
+        }
     </div>
 </div>
 
-@*<div class="row">
+<div class="row">
     <div class="col-md-2">
         <strong>Županija:</strong>
     </div>
     <div class="col-md-10">
-        @Model.Zupanija
+        @if (@Model.Mjesto != null)
+        {
+            @Model.Mjesto.Zupanija.nazivZupanija
+        }
     </div>
-</div>*@
+</div>
 
 <div class="row">
     <div class="col-md-2">

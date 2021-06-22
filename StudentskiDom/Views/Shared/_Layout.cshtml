@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using StudentskiDom.Misc 
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -16,13 +17,41 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Studentski Dom", "Index", "Korisnici", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Studentski Dom", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Početna", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Korisnici", "Index", "Korisnici")</li>
-                    
+
+                    @if (User.Identity.IsAuthenticated && (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Korisnik))
+                    {
+                        <li>@Html.ActionLink("Korisnici", "PopisKorisnika", "Korisnici")</li>
+                    }
+                    @if (User.Identity.IsAuthenticated &&
+                      (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Administrator))
+                    {
+                        <li>@Html.ActionLink("Korisnici", "PopisKorisnika", "Korisnici")</li>
+                        <li>@Html.ActionLink("Zahtjevi", "Index", "Zahtjevi")</li>
+                        <li>@Html.ActionLink("Uplata", "Index", "Uplata")</li>
+
+                    }
+
+
+                    <li>@Html.ActionLink("Sobe", "Index", "Sobe")</li>
+                    <li>@Html.ActionLink("Slike soba", "Index", "SlikaSobe")</li>
+
+
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink((User as LogiraniKorisnik).PrezimeIme, "Index", "Home")</li>
+                        <li>@Html.ActionLink("Odjava", "Odjava", "Korisnik")</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Registracija", "Registracija", "Korisnik")</li>
+                        <li>@Html.ActionLink("Prijava", "Prijava", "Korisnik")</li>
+                    }
                 </ul>
             </div>
         </div>
@@ -31,7 +60,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; Međimursko veleučilište u Čakovcu @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; Međimursko veleučilište u Čakovcu @DateTime.Now.Year - Studentski dom</p>
         </footer>
     </div>
 

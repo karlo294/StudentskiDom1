@@ -1,0 +1,85 @@
+﻿@using StudentskiDom.Models
+@model Zahtjev
+
+@{
+    ViewBag.Title = "Detalji";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+}
+
+<h2>Detalji o zahtjevu</h2>
+
+<div class="row">
+    <div class="col-md-2">
+        <strong>Id zahtjeva:</strong>
+    </div>
+    <div class="col-md-10">
+        @Model.IdZahtjev
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-2">
+        <strong>Korisnik:</strong>
+    </div>
+    <div class="col-md-10">
+        @Model.Korisnik.PrezimeIme
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-2">
+        <strong>Datum podnošenja zahtjeva:</strong>
+    </div>
+    <div class="col-md-10">
+        @(Model?.datumZahtjeva?.ToString("dd.MM.yyyy"))
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-2">
+        <strong>Status zahtjeva:</strong>
+    </div>
+    <div class="col-md-10">
+        @if (@Model.statusZahtjeva == true)
+        {
+            <div>Odobreno</div>
+        }
+        else
+        {
+            <div>Ne odobreno</div>
+        }
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-2">
+        <strong>Soba:</strong>
+    </div>
+    <div class="col-md-10">
+        @Model.idSoba
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-2">
+        <strong>Datum useljenja:</strong>
+    </div>
+    <div class="col-md-10">
+        @(Model?.datumUseljenja?.ToString("dd.MM.yyyy"))
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-2">
+        <strong>Datum iseljenja:</strong>
+    </div>
+    <div class="col-md-10">
+        @(Model?.datumIseljenja?.ToString("dd.MM.yyyy")) 
+    </div>
+</div>
+
+
+@Html.ActionLink("Povratak na popis zahtjeva", "Index", "Zahtjevi", null, new { @class = "btn btn-primary btn-sm" })

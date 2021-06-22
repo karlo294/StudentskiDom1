@@ -1,5 +1,7 @@
 ﻿@using StudentskiDom.Models
 @using PagedList.Mvc;
+
+@using StudentskiDom.Misc
 @model PagedList.IPagedList<Korisnik>
 @{ 
     AjaxOptions ajaxOpt = new AjaxOptions()
@@ -13,46 +15,76 @@
 }
 
 <div id="popisKorisnika">
+
     <table id="tableKorisnici" class="table table-striped">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>
                     <!--Trenutno je napravljen sort samo po prezimenu korisnika moguce napraviti i po godini studija mozda smao ne znam kako-->
-                    @Ajax.ActionLink("Prezime","PopisKorisnikaPartial",
-                   new {naziv=ViewBag.Naziv,sort=ViewBag.NazivSort},ajaxOpt)    <!--pretpostavljamn da se to moze tak napisati-->
+                    @Ajax.ActionLink("Prezime", "PopisKorisnikaPartial",
+                   new { naziv = ViewBag.Naziv, sort = ViewBag.NazivSort }, ajaxOpt)    <!--pretpostavljamn da se to moze tak napisati-->
                 </th>
                 <th>Ime</th>
                 <th>OIB</th>
                 <th>Redovni</th>
-                <th>Akcije</th>
+                @if (User.Identity.IsAuthenticated &&
+            (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Administrator))
+                {
+                    <th></th>
+                    <th>Akcije</th>
+                    <th></th>
+                }
+                else if (User.Identity.IsAuthenticated && (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Korisnik))
+                {
+                    <th>Akcije</th>
+
+                }
             </tr>
         </thead>
         <tbody>
-            <!--vjerojatno bude trebalo doraditi jer ja kratim na ono sto trenutno imamo(drugi calnovi tima doraditi)-->
-            @if (Model.Any)
+           
+            @if (Model.Any())
             {
                 foreach (var korisnik in Model)
                 {
             <tr>
-                <td>@Korisnik.Id</td>
-                <td>@Korisnik.Prezime</td>
-                <td>@Korisnik.Ime</td>
+                <td>@korisnik.Id</td>
+                <td>@korisnik.Prezime</td>
+                <td>@korisnik.Ime</td>
                 <td>@korisnik.Oib</td>
                 <td>@Html.CheckBox("chbRedovan", korisnik.StatusStudenta, new { @disabled = true })</td>
-                <td>
-                    @Html.ActionLink("Info", "Detalji", new { id = korisnik.Id }, new { @class = "btn btn-info btn-sm" })
-                    @Html.ActionLink("Ažuriraj", "Azuriraj", new { id = korisnik.Id }, new { @class = "btn btn-warning btn-sm" })
-                    @Html.ActionLink("Izbriši", "Brisi", new { id = korisnik.Id }, new { @class = "btn btn-danger btn-sm" })
-                </td>
-            </tr>
+                @if (User.Identity.IsAuthenticated &&
+                              ((User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Administrator) || (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Korisnik)))
+                {
+                        <td>
+                        @Html.ActionLink("Detalji", "Detalji", new { id = korisnik.Id }, new { @class = "btn btn-info btn-sm" })
+                        </td>
+                }
+                        @if (User.Identity.IsAuthenticated && (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Administrator))
+                        {
+                        <td>
+                        @Html.ActionLink("Ažuriraj", "Azuriraj", new { id = korisnik.Id }, new { @class = "btn btn-warning btn-sm" })
+                        </td>
+                        <td>
+                        @Html.ActionLink("Izbriši", "Brisi", new { id = korisnik.Id }, new { @class = "btn btn-danger btn-sm" })
+                        
+                        </td>
+                        }
+
+                    
+                    
+                </tr>
                 }
             }
             else
             {
-                <tr>
-                    <td colspan="7" style="text-align:center;">Nema rezultata pretrage</td>
-                </tr>
+
+              < tr >
+                < td colspan = "7" style = "text-align:center;" > Nema rezultata pretrage</ td >
+
+
+                       </ tr >
             }
         </tbody>
     </table>
@@ -65,5 +97,12 @@
        new {page,naziv=ViewBag.Naziv,sort=ViewBag.Sortiranje}),
        PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(ajaxOpt))
     </div>
+
+    <p>
+        <a href="@Url.Action("IspisKorisnika","Korisnici",new {naziv=ViewBag.Naziv,sort=ViewBag.Sortitranje})" class="btn btn-primary">
+            <span class="glyphicon glyphicon-print" aria-hidden="true"></span> Kreiraj PDF
+        </a>
+    </p>
+
 </div>
 

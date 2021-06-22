@@ -1,0 +1,92 @@
+﻿@using StudentskiDom.Models
+@model Uplata
+@{
+    ViewBag.Title = "Detalji o uplatama";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Detalji o uplatama</h2>
+
+<div class="row">
+    <div class="col-md-2">
+        <strong>Id uplata:</strong>
+    </div>
+    <div class="col-md-10">
+        @Model.IdUplata
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-2">
+        <strong>Korisnik:</strong>
+    </div>
+    <div class="col-md-10">
+        @Model.Korisnik.PrezimeIme
+    </div>
+</div>
+
+@*<div class="row">
+    <div class="col-md-2">
+        <strong>Datum uplate:</strong>
+    </div>
+    <div class="col-md-10">
+        @(Model?.datumUplate.ToString("dd.MM.yyyy"))
+    </div>
+</div>*@
+
+<div class="row">
+    <div class="col-md-2">
+        <strong>Status uplate:</strong>
+    </div>
+    <div class="col-md-10">
+        @if (@Model.statusPlacanja == true)
+        {
+            <div>Plačeno</div>
+        }
+        else
+        {
+            <div>Nije plačeno</div>
+        }
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-2">
+        <strong>Soba:</strong>
+    </div>
+    <div class="col-md-10">
+        @Model.idSobe
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-2">
+        <strong>Iznos uplate:</strong>
+    </div>
+    <div class="col-md-10">
+        @Model.iznosUplata
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-2">
+        <strong>Opis uplata:</strong>
+    </div>
+    <div class="col-md-10">
+        @Model.opisUplate
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-2">
+        <strong>Razdoblje uplate:</strong>
+    </div>
+    <div class="col-md-10">
+        @Model.razdobljeUplata
+    </div>
+</div>
+
+@Html.ActionLink("Povratak na popis uplata", "Index", "Uplata", null, new { @class = "btn btn-primary btn-sm" })
+
+

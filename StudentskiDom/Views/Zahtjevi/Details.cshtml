@@ -1,0 +1,76 @@
+﻿
+@*@model StudentskiDom.Models.Zahtjev
+
+@{
+    ViewBag.Title = "Detalji zahtjeva";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Podaci o zahtjevu</h2>
+
+<div>
+    <h4>Smjer</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IdZahtjev)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdZahtjev)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idKorisnik)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idKorisnik)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Soba)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Soba)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.statusZahtjeva)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.statusZahtjeva)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.datumZahtjeva)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.datumZahtjeva)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.datumIseljenja)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.datumIseljenja)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.datumUsljenja)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.datumUsljenja)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    
+    @Html.ActionLink("Povratak na popis", "Index")
+</p>*@

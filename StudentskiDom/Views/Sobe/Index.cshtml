@@ -1,0 +1,43 @@
+﻿@using StudentskiDom.Models
+@model List<Sobe>
+@{
+    ViewBag.Title = "Popis soba";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Popis soba</h2>
+
+<table class="table table-striped">
+    <tr>
+        <th>Id sobe</th>
+        <th>Broj kreveta</th>
+        <th>Detalji</th>
+
+
+    </tr>
+    @foreach (var soba in Model)
+    {
+<tr>
+    <td>@Html.DisplayFor(modelItem => soba.IdSoba)</td>
+
+    @if (soba.BrojKreveta == 1)
+    {
+        <td> @Html.DisplayName("Jednokrevetna")</td>
+
+    }
+    else
+    {
+<td>
+    @Html.DisplayName("Dvokrevetna")
+</td>
+    }
+    
+    <td>@Html.ActionLink("Detalji", "Detalji", new { id = soba.IdSoba }, new { @class = "btn btn-info btn-sm" })</td>
+
+
+</tr>
+    }
+</table>
+
+
+
