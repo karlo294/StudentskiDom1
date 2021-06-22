@@ -1,0 +1,16 @@
+Znaci profesor je otkrio di je bio error(krivo smo napisali unutar web configa)
+nakon toga sam to prepravio i sad radi donekle
+radi nam prikaz korisnika s tim da kad se klikne na detalji pod redovni student pise true/false umjesto DA/NE treba to doraditi
+nakon toga broj telefona se i dalje ne prikazuje u cjelosti znaci nije 098 nego je samo 98 potrebno doraditi
+takoder sam morao zakomentirati dio koji bi trebao prikazivati zupaniju jer nije unesen unutar tablice korisnik u bazi-potrebno doraditi
+isto tak sam morao zakomentirati polje indikatorStudetna jer nije htjelo raditi ne znam zasto-otkriti i popraviti 
+Takoder bi trebalo doraditi dio u prikazu korisnika azuriraj jer trenutno ne radi ne znam tocno zasto, te doraditi kreiranje novog korisnika jer trenutno ne radi i takoder provjeriti zasto ne radi pretraga po nazivu
+makar mislim da je to zbog toga jer sam jedan dio trebao zakomentirati jer je inace izbacivalo error-pogledati i doraditi
+
+Znaci od cijelog prikaza korisnika radi nam detalji i izbrisi
+Imamo vremena do iduceg utorka tad mu opet trebam donijeti projekt na pregled
+
+
+A za sami dizajn se budemo dogovorili kak bude to izgledalo ja sam zamislil da korisnik ne moze vidjeti korisnike koji su u sobama sve dok se ne registrira ili dok mu se ne odobri zahtjev za smjestaj
+znaci da bi zahtjev za smjestaj trebao biti allow anonimno
+takoder je profesor rekao da ako hocemo mozemo skinuti neke gotove tamplate i samo ih ubaciti unutar projekta da ne izgleda obicno-potreban dogovor
