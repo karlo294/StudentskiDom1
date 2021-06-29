@@ -73,12 +73,27 @@ CREATE TABLE `slike` (
 
 insert  into `slike`(`idSlika`,`slikaPut`) values (1,'soba1.1.jpg');
 
+/*Table structure for table `slike_sobe` */
+
+DROP TABLE IF EXISTS `slike_sobe`;
+
+CREATE TABLE `slike_sobe` (
+  `IdSoba` int(11) NOT NULL,
+  `slikaPut` text NOT NULL,
+  `idSlika` int(11) NOT NULL,
+  PRIMARY KEY (`idSlika`),
+  KEY `fk_sobe` (`IdSoba`),
+  CONSTRAINT `fk_sobe` FOREIGN KEY (`IdSoba`) REFERENCES `soba` (`IdSoba`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `slike_sobe` */
+
 /*Table structure for table `soba` */
 
 DROP TABLE IF EXISTS `soba`;
 
 CREATE TABLE `soba` (
-  `IdSoba` int(11) NOT NULL,
+  `IdSoba` int(11) NOT NULL AUTO_INCREMENT,
   `brojKreveta` int(11) NOT NULL,
   `velicinaSoba` int(11) DEFAULT NULL,
   `opisSobe` text DEFAULT NULL,
@@ -86,7 +101,7 @@ CREATE TABLE `soba` (
   PRIMARY KEY (`IdSoba`),
   KEY `idSlika` (`idSlika`),
   CONSTRAINT `soba_ibfk_1` FOREIGN KEY (`idSlika`) REFERENCES `slike` (`idSlika`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 /*Data for the table `soba` */
 
@@ -106,10 +121,10 @@ CREATE TABLE `uplata` (
   `zaRazdoblje` varchar(135) DEFAULT NULL,
   `IdKorisnik` int(11) NOT NULL,
   PRIMARY KEY (`IdUplata`),
-  KEY `IdSoba` (`IdSoba`),
   KEY `IdKorisnik` (`IdKorisnik`),
-  CONSTRAINT `uplata_ibfk_1` FOREIGN KEY (`IdSoba`) REFERENCES `soba` (`IdSoba`),
-  CONSTRAINT `uplata_ibfk_2` FOREIGN KEY (`IdKorisnik`) REFERENCES `korisnici` (`IdKorisnik`)
+  KEY `IdSoba` (`IdSoba`),
+  CONSTRAINT `uplata_ibfk_2` FOREIGN KEY (`IdKorisnik`) REFERENCES `korisnici` (`IdKorisnik`),
+  CONSTRAINT `uplata_ibfk_3` FOREIGN KEY (`IdSoba`) REFERENCES `soba` (`IdSoba`)
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 /*Data for the table `uplata` */
@@ -132,7 +147,8 @@ CREATE TABLE `zahtjev` (
   KEY `IdKorisnik` (`IdKorisnik`),
   KEY `IdSoba` (`IdSoba`),
   CONSTRAINT `zahtjev_ibfk_1` FOREIGN KEY (`IdKorisnik`) REFERENCES `korisnici` (`IdKorisnik`),
-  CONSTRAINT `zahtjev_ibfk_2` FOREIGN KEY (`IdSoba`) REFERENCES `soba` (`IdSoba`)
+  CONSTRAINT `zahtjev_ibfk_2` FOREIGN KEY (`IdSoba`) REFERENCES `soba` (`IdSoba`),
+  CONSTRAINT `zahtjev_ibfk_3` FOREIGN KEY (`IdSoba`) REFERENCES `soba` (`IdSoba`)
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
 /*Data for the table `zahtjev` */

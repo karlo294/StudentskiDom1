@@ -1,4 +1,5 @@
-﻿using StudentskiDom.Models;
+﻿using StudentskiDom.Misc;
+using StudentskiDom.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,12 +8,18 @@ using System.Web.Mvc;
 
 namespace StudentskiDom.Controllers
 {
+    [Authorize(Roles = OvlastiKorisnik.Administrator + "," + OvlastiKorisnik.Korisnik)]
     public class UplataController : Controller
     {
         private BazaDBContext bazaPodataka = new BazaDBContext();
         // GET: Uplata
         public ActionResult Index()
         {
+            LogiraniKorisnik k = User as LogiraniKorisnik;
+            if (k != null)
+            {
+                ViewBag.Korisnik = k.Id;
+            }
             return View(bazaPodataka.popisUplata.OrderBy(x=>x.IdUplata).ToList());
         }
 
@@ -124,7 +131,7 @@ namespace StudentskiDom.Controllers
             }
             else
             {
-                ViewBag.Title("Kreiranje nove uplate");
+                ViewBag.Title="Kreiranje nove uplate";
                 ViewBag.Novi = true;
                
             }

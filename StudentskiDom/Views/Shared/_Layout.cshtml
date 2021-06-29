@@ -25,6 +25,9 @@
                     @if (User.Identity.IsAuthenticated && (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Korisnik))
                     {
                         <li>@Html.ActionLink("Korisnici", "PopisKorisnika", "Korisnici")</li>
+                        <li>@Html.ActionLink("Zahtjevi", "Index", "Zahtjevi")</li>
+                        <li>@Html.ActionLink("Uplata", "Index", "Uplata")</li>
+                        <li>@Html.ActionLink("Sobe", "Index", "Sobe")</li>
                     }
                     @if (User.Identity.IsAuthenticated &&
                       (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Administrator))
@@ -32,11 +35,12 @@
                         <li>@Html.ActionLink("Korisnici", "PopisKorisnika", "Korisnici")</li>
                         <li>@Html.ActionLink("Zahtjevi", "Index", "Zahtjevi")</li>
                         <li>@Html.ActionLink("Uplata", "Index", "Uplata")</li>
+                        <li>@Html.ActionLink("Sobe", "Index", "Sobe")</li>
 
                     }
 
 
-                    <li>@Html.ActionLink("Sobe", "Index", "Sobe")</li>
+
                     <li>@Html.ActionLink("Slike soba", "Index", "SlikaSobe")</li>
 
 

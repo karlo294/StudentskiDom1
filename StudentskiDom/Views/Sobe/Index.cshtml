@@ -1,4 +1,5 @@
 ﻿@using StudentskiDom.Models
+@using StudentskiDom.Misc
 @model List<Sobe>
 @{
     ViewBag.Title = "Popis soba";
@@ -6,36 +7,81 @@
 }
 
 <h2>Popis soba</h2>
+@if (User.IsInRole(OvlastiKorisnik.Administrator))
+{
+    <a href="@Url.Action("Azuriraj","Sobe")" class="btn btn-success">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Kreiranje nove sobe
+    </a>
+}
+<br />
+<br />
+<br />
 
 <table class="table table-striped">
     <tr>
         <th>Id sobe</th>
         <th>Broj kreveta</th>
-        <th>Detalji</th>
+        <th></th>
+        <th>Akcije</th>
+        <th></th>
 
 
     </tr>
-    @foreach (var soba in Model)
+    @if (User.Identity.IsAuthenticated && (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Korisnik))
     {
-<tr>
-    <td>@Html.DisplayFor(modelItem => soba.IdSoba)</td>
+        foreach (var soba in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => soba.IdSoba)</td>
 
-    @if (soba.BrojKreveta == 1)
-    {
-        <td> @Html.DisplayName("Jednokrevetna")</td>
+                @if (soba.BrojKreveta == 1)
+                {
+                    <td> @Html.DisplayName("Jednokrevetna")</td>
 
+                }
+                else
+                {
+                    <td>
+                        @Html.DisplayName("Dvokrevetna")
+                    </td>
+                }
+
+                <td>@Html.ActionLink("Detalji", "Detalji", new { id = soba.IdSoba }, new { @class = "btn btn-info btn-sm" })</td>
+                @*<td>@Html.ActionLink("Ažuriraj", "Azuriraj", new { id = soba.IdSoba }, new { @class = "btn btn-danger btn-sm" })</td>
+                    <td>@Html.ActionLink("Briši", "Brisi", new { id = soba.IdSoba }, new { @class = "btn btn-warning btn-sm" })</td>*@
+
+
+
+            </tr>
+        }
     }
-    else
+    else if (User.Identity.IsAuthenticated && (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Administrator))
     {
-<td>
-    @Html.DisplayName("Dvokrevetna")
-</td>
-    }
-    
-    <td>@Html.ActionLink("Detalji", "Detalji", new { id = soba.IdSoba }, new { @class = "btn btn-info btn-sm" })</td>
+        foreach (var soba in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => soba.IdSoba)</td>
+
+                @if (soba.BrojKreveta == 1)
+                {
+                    <td> @Html.DisplayName("Jednokrevetna")</td>
+
+                }
+                else
+                {
+                    <td>
+                        @Html.DisplayName("Dvokrevetna")
+                    </td>
+                }
+
+                <td>@Html.ActionLink("Detalji", "Detalji", new { id = soba.IdSoba }, new { @class = "btn btn-info btn-sm" })</td>
+                <td>@Html.ActionLink("Ažuriraj", "Azuriraj", new { id = soba.IdSoba }, new { @class = "btn btn-danger btn-sm" })</td>
+                    <td>@Html.ActionLink("Briši", "Brisi", new { id = soba.IdSoba }, new { @class = "btn btn-warning btn-sm" })</td>
 
 
-</tr>
+
+            </tr>
+        }
     }
 </table>
 

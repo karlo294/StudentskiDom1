@@ -31,6 +31,7 @@ namespace StudentskiDom
                 LogiraniKorisnik korisnik = new LogiraniKorisnik(authTicekt.Name);
                 korisnik.PrezimeIme = serializeModel.PrezimeIme;
                 korisnik.Indikator = serializeModel.Indikator;
+                korisnik.Id = serializeModel.Id; //hmm nezz jel to dobro
                 HttpContext.Current.User = korisnik;
             }
         }

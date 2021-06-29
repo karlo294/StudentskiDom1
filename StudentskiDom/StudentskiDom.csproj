@@ -264,6 +264,9 @@
     <Content Include="Views\Sobe\Index.cshtml" />
     <Content Include="Views\Sobe\Detalji.cshtml" />
     <Content Include="Views\SlikaSobe\Index.cshtml" />
+    <Content Include="Views\Sobe\Brisi.cshtml" />
+    <Content Include="Views\Sobe\BrisiStatus.cshtml" />
+    <Content Include="Views\Sobe\Azuriraj.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

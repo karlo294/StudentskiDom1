@@ -22,15 +22,21 @@ namespace StudentskiDom.Models
         [Column("datPodnosenjaZahtjeva")]
         [Display(Name = "Datum podnošenja zahtjeva")]
         [Required]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Date)]
         public DateTime? datumZahtjeva { get; set; }
 
         [Column("datUseljenja")]
         [Display(Name = "Datum useljenja")]
-        
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Date)]
+
         public DateTime? datumUseljenja { get; set; }
 
         [Column("datIseljenja")]
         [Display(Name = "Datum iseljenja")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Date)]
         public DateTime? datumIseljenja { get; set; }
 
         [Column("IdKorisnik")]

@@ -3,59 +3,137 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@if (ViewBag.Novi)
+{
+    <h2>Kreiranje novog zahtjeva</h2>
+}
+else
+{
+    <h2>Ažuriranje podataka o zahtjevu</h2>
 
-
-<h2>Ažuriranje podataka o zahtjevu</h2>
-
-
-
-
+}
 
 @using (Html.BeginForm("Azuriraj", "Zahtjevi", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true, "Ispravite podatke");
-    
-    <div class="form-group">
-        @Html.LabelFor(model => model.Korisnik.PrezimeIme, new { @class = "col-sm-2 control-label" })
-        <div class="col-sm-10">
-            @Html.TextBoxFor(model => model.Korisnik.PrezimeIme, new { disabled = true, @class = "form-control" })
+    if (!ViewBag.Novi)
+    {
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.Korisnik.PrezimeIme, new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(model => model.Korisnik.PrezimeIme, new { disabled = true, @class = "form-control" })
+                </div>
+            </div>*@
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.idKorisnik, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-10">
+                @Html.DropDownListFor(model => model.idKorisnik,
+               new SelectList(ViewBag.Korisnici, "Id", "PrezimeIme", ""), new { disabled=true, @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.idKorisnik, "", new { @class = "text-danger" })
+                @Html.HiddenFor(x => x.IdZahtjev)
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.IdZahtjev, new { @class = "col-sm-2 control-label" })
-        <div class="col-sm-10">
-            @Html.TextBoxFor(model => model.IdZahtjev, new { disabled = true, @class = "form-control" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.idSoba, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-10">
+                @Html.DropDownListFor(model => model.idSoba,
+               new SelectList(ViewBag.Sobe, "IdSoba", "IdSoba", ""), new { disabled=true, @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.idSoba, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.idKorisnik, new { @class = "col-sm-2 control-label" })
-        <div class="col-sm-10">
-            @Html.TextBoxFor(model => model.idKorisnik, new { disabled = true, @class = "form-control" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.datumZahtjeva, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-10">
+                @Html.EditorFor(model => model.datumZahtjeva, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.datumZahtjeva, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Korisnik.Oib, new { @class = "col-sm-2 control-label" })
-        <div class="col-sm-10">
-            @Html.TextBoxFor(model => model.Korisnik.Oib, new { disabled = true, @class = "form-control" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.datumUseljenja, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-10">
+                @Html.EditorFor(model => model.datumUseljenja, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.datumUseljenja, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
-
-
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.statusZahtjeva, new { @class = "col-sm-2 control-label" })
-        <div class="col-sm-10">
-            @Html.CheckBoxFor(model => model.statusZahtjeva)
-            @Html.ValidationMessageFor(model => model.statusZahtjeva, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.datumIseljenja, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-10">
+                @Html.EditorFor(model => model.datumIseljenja, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.datumIseljenja, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
-    
+        <div class="form-group">
+            @Html.LabelFor(model => model.statusZahtjeva, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-10">
+                @Html.CheckBoxFor(model => model.statusZahtjeva)
+                @Html.ValidationMessageFor(model => model.statusZahtjeva, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="form-group">
+            @Html.LabelFor(model => model.idKorisnik, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-10">
+                @Html.DropDownListFor(model => model.idKorisnik,
+               new SelectList(ViewBag.Korisnici, "Id", "PrezimeIme", ""), new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.idKorisnik, "", new { @class = "text-danger" })
+                @Html.HiddenFor(x => x.IdZahtjev)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.idSoba, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-10">
+                @Html.DropDownListFor(model => model.idSoba,
+               new SelectList(ViewBag.Sobe, "IdSoba", "IdSoba", ""), new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.idSoba, "", new { @class = "text-danger" })
+                @*@Html.HiddenFor(x=>x.IdZahtjev)*@
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.datumZahtjeva, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-10">
+                @Html.EditorFor(model => model.datumZahtjeva, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.datumZahtjeva, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.datumUseljenja, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-10">
+                @Html.EditorFor(model => model.datumUseljenja, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.datumUseljenja, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.datumIseljenja, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-10">
+                @Html.EditorFor(model => model.datumIseljenja, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.datumIseljenja, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.statusZahtjeva, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-10">
+                @Html.CheckBoxFor(model => model.statusZahtjeva)
+                @Html.ValidationMessageFor(model => model.statusZahtjeva, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+    }
+
+
     <div>
 
     </div>

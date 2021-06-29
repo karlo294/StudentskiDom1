@@ -1,0 +1,20 @@
+﻿@using StudentskiDom.Models
+@model Sobe
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+<strong>Jeste li sigurni da želite izbrisati sobu @Model.IdSoba ?</strong>
+
+@using (Html.BeginForm("Brisi", "Sobe"))
+{
+    @Html.AntiForgeryToken();
+    <button type="submit" class="btn btn-danger">
+        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Izbriši
+    </button>
+    <br />
+    <br />
+
+    @Html.ActionLink("Odustani", "Index");
+}

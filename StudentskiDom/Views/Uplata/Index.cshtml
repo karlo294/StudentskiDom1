@@ -1,4 +1,5 @@
 ﻿@using StudentskiDom.Models
+@using StudentskiDom.Misc
 @model List<Uplata>
 @{
     ViewBag.Title = "Popis uplata";
@@ -6,12 +7,16 @@
 }
 
 <h2>Popis uplata</h2>
-<a href="@Url.Action("Azuriraj","Uplata")" class="btn btn-success">
-    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Kreiranje nove uplate
-</a>
+
+@if (User.IsInRole(OvlastiKorisnik.Administrator))
+{
+    <a href="@Url.Action("Azuriraj","Uplata")" class="btn btn-success">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Kreiranje nove uplate
+        </a>
+}
 <br />
-<br/>
-<br/>
+<br />
+<br />
 
 <table class="table table-striped">
     <tr>
@@ -23,18 +28,42 @@
         <th></th>
 
     </tr>
-    @foreach (var uplata in Model)
+    @if (User.Identity.IsAuthenticated && (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Korisnik))
     {
-        <tr>
-            <td>@Html.DisplayFor(modelItem => uplata.IdUplata)</td>
-            <td>@Html.DisplayFor(modelItem => uplata.razdobljeUplata)</td>
-            <td>@Html.DisplayFor(modelItem => uplata.Korisnik.PrezimeIme)</td>
-            <td>@Html.ActionLink("Detalji", "Detalji", new { id = uplata.IdUplata }, new { @class = "btn btn-info btn-sm" })</td>
-            <td>@Html.ActionLink("Ažuriraj", "Azuriraj", new { id = uplata.IdUplata }, new { @class = "btn btn-danger btn-sm" })</td>
-            <td>@Html.ActionLink("Briši", "Brisi", new { id = uplata.IdUplata }, new { @class = "btn btn-warning btn-sm" })</td>
+        foreach (var uplata in Model)
+        {
+            if (uplata?.Korisnik.Id == ViewBag.Korisnik)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => uplata.IdUplata)</td>
+                    <td>@Html.DisplayFor(modelItem => uplata.razdobljeUplata)</td>
+                    <td>@Html.DisplayFor(modelItem => uplata.Korisnik.PrezimeIme)</td>
+                    <td>@Html.ActionLink("Detalji", "Detalji", new { id = uplata.IdUplata }, new { @class = "btn btn-info btn-sm" })</td>
+                    <td>@Html.ActionLink("Ažuriraj", "Azuriraj", new { id = uplata.IdUplata }, new { @class = "btn btn-danger btn-sm" })</td>
+                    @*<td>@Html.ActionLink("Briši", "Brisi", new { id = uplata.IdUplata }, new { @class = "btn btn-warning btn-sm" })</td>*@
 
-        </tr>
+                </tr>
+
+            }
+        }
     }
+    else if (User.Identity.IsAuthenticated && (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Administrator))
+    {
+
+        foreach (var uplata in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => uplata.IdUplata)</td>
+                <td>@Html.DisplayFor(modelItem => uplata.razdobljeUplata)</td>
+                <td>@Html.DisplayFor(modelItem => uplata.Korisnik.PrezimeIme)</td>
+                <td>@Html.ActionLink("Detalji", "Detalji", new { id = uplata.IdUplata }, new { @class = "btn btn-info btn-sm" })</td>
+                <td>@Html.ActionLink("Ažuriraj", "Azuriraj", new { id = uplata.IdUplata }, new { @class = "btn btn-danger btn-sm" })</td>
+                <td>@Html.ActionLink("Briši", "Brisi", new { id = uplata.IdUplata }, new { @class = "btn btn-warning btn-sm" })</td>
+
+            </tr>
+        }
+    }
+
 </table>
 
 

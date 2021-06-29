@@ -10,11 +10,13 @@ namespace StudentskiDom.Misc
         public string Email { get; set; }
         public string PrezimeIme { get; set; }
         public bool Indikator{ get; set; }
+        public int Id { get; set; }
         internal void CopyFromUser(LogiraniKorisnik user)
         {
             this.Email= user.Email;
             this.PrezimeIme = user.PrezimeIme;
             this.Indikator = user.Indikator;
+            this.Id = user.Id; //hmm nezz jel to dobro
         }
     }
 }

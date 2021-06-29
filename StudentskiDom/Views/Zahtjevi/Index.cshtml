@@ -1,4 +1,5 @@
 ﻿@using StudentskiDom.Models
+@using StudentskiDom.Misc
 @model List<Zahtjev>
 @{
     ViewBag.Title = "Popis zahtjeva";
@@ -6,6 +7,12 @@
 }
 
 <h2>Popis zahtjeva</h2>
+<a href="@Url.Action("Azuriraj","Zahtjevi")" class="btn btn-success">
+    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Kreiranje novog zahtjeva
+</a>
+<br />
+<br />
+<br />
 
 <table class="table table-striped">
     <tr>
@@ -17,17 +24,42 @@
         <th></th>
 
     </tr>
-    @foreach (var zahtjev in Model)
+    
+    @if (User.Identity.IsAuthenticated && (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Korisnik))
     {
-<tr>
-    <td>@Html.DisplayFor(model => zahtjev.IdZahtjev)</td>
-    <td>@Html.DisplayFor(modelItem => zahtjev.datumZahtjeva.Value.Year)</td>
-    <td>@Html.DisplayFor(modelItem => zahtjev.Korisnik.PrezimeIme)</td>
-    <td>@Html.ActionLink("Detalji", "Detalji", new { id = zahtjev.IdZahtjev }, new { @class = "btn btn-info btn-sm" })</td>
-    <td>@Html.ActionLink("Ažuriraj", "Azuriraj", new { id = zahtjev.IdZahtjev }, new { @class = "btn btn-danger btn-sm" })</td>
-    <td>@Html.ActionLink("Briši", "Brisi", new { id = zahtjev.IdZahtjev }, new { @class = "btn btn-warning btn-sm" })</td>
+        foreach (var zahtjev in Model)
+        {
+            if (zahtjev?.Korisnik.Id == ViewBag.Korisnik)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(model => zahtjev.IdZahtjev)</td>
+                    <td>@Html.DisplayFor(modelItem => zahtjev.datumZahtjeva.Value.Year)</td>
+                    <td>@Html.DisplayFor(modelItem => zahtjev.Korisnik.PrezimeIme)</td>
+                    <td>@Html.DisplayFor(modelItem => zahtjev.statusZahtjeva)</td>
+                    <td>@Html.ActionLink("Detalji", "Detalji", new { id = zahtjev.IdZahtjev }, new { @class = "btn btn-info btn-sm" })</td>
+                    @*<td>@Html.ActionLink("Ažuriraj", "Azuriraj", new { id = zahtjev.IdZahtjev }, new { @class = "btn btn-danger btn-sm" })</td>*@
+                    @*<td>@Html.ActionLink("Briši", "Brisi", new { id = zahtjev.IdZahtjev }, new { @class = "btn btn-warning btn-sm" })</td>*@
 
-</tr>
+                </tr>
+            }
+        }
     }
+    else if (User.Identity.IsAuthenticated && (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Administrator))
+    {
+        foreach (var zahtjev in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(model => zahtjev.IdZahtjev)</td>
+                <td>@Html.DisplayFor(modelItem => zahtjev.datumZahtjeva.Value.Year)</td>
+                <td>@Html.DisplayFor(modelItem => zahtjev.Korisnik.PrezimeIme)</td>
+                <td>@Html.DisplayFor(modelItem => zahtjev.statusZahtjeva)</td>
+                <td>@Html.ActionLink("Detalji", "Detalji", new { id = zahtjev.IdZahtjev }, new { @class = "btn btn-info btn-sm" })</td>
+                <td>@Html.ActionLink("Ažuriraj", "Azuriraj", new { id = zahtjev.IdZahtjev }, new { @class = "btn btn-danger btn-sm" })</td>
+                <td>@Html.ActionLink("Briši", "Brisi", new { id = zahtjev.IdZahtjev }, new { @class = "btn btn-warning btn-sm" })</td>
+
+            </tr>
+        }
+    }
+
 </table>
 

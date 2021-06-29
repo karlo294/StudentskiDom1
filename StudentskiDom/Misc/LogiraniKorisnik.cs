@@ -12,6 +12,7 @@ namespace StudentskiDom.Misc
         public string Email { get; set; }
         public string PrezimeIme { get; set; }
         public bool Indikator { get; set; }
+        public int Id { get; set; } //hmm nezz jel to dobro
      
         public IIdentity Identity { get; private set; }
         public bool IsInRole(string role)
@@ -26,8 +27,9 @@ namespace StudentskiDom.Misc
         {
             this.Identity = new GenericIdentity(kor.Email); 
             this.Email = kor.Email;
-            this.PrezimeIme = kor.PrezimeIme; //tu ne izbacuje error jer metoda prezimeIme vec postoji u modelu korisnik
-            this.Indikator = kor.InidikatorStudenta; //takoder izbacuje error iz istog razloga-potrebno doraditi ili kreirati novu tablicu
+            this.PrezimeIme = kor.PrezimeIme;
+            this.Indikator = kor.InidikatorStudenta;
+            this.Id = kor.Id;
 
         }
         public LogiraniKorisnik(string email)
